@@ -1,0 +1,12 @@
+.vscode/
+.idea/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.cache/
+.DS_Store
+.ipynb_checkpoints
+.venv/
+venv/
