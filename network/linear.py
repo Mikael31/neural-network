@@ -9,13 +9,12 @@ class LinearLayer(BaseLayer):
         self.init_weights()
 
     def init_weights(self, activation="relu"):
-        mean = 0
         if activation == "relu":
             std_dev = np.sqrt(2 / self.input_size)
         else:
             std_dev = np.sqrt(2 / self.input_size + self.output_size)
 
-        self.weights = np.random.normal(mean, std_dev, (self.output_size, self.input_size))
+        self.weights = np.random.normal(0, std_dev, (self.output_size, self.input_size))
         self.biases = np.zeros(self.output_size)
 
 
@@ -23,9 +22,12 @@ class LinearLayer(BaseLayer):
         self.cached_input = input
         return input @ self.weights.T + self.biases
 
-    def backward(self, grad_output):
-        self.dw = grad_output.T @ self.cached_input
-        self.db = grad_output @ np.ones(self.biases.shape)
-        dx = grad_output @ self.weights
-        return dx if grad_output.shape[0] > 1 else dx.squeeze()
+    def backward(self, upstream_gradient):
+        upstream_gradient = np.atleast_2d(upstream_gradient)
+        self.cached_input = np.atleast_2d(self.cached_input)
+
+        self.dw = upstream_gradient.T @ self.cached_input
+        self.db = upstream_gradient.T @ np.ones(upstream_gradient.shape[0])
+        dx = upstream_gradient @ self.weights
+        return dx if upstream_gradient.shape[0] > 1 else dx.squeeze()
 
