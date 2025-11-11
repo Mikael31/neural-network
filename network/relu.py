@@ -10,3 +10,9 @@ class ReLU():
         masked_gradient = upstream_gradient * mask
         return masked_gradient
 
+    def parameters(self):
+        return []
+
+    def gradients(self):
+        return []
+

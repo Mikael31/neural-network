@@ -29,3 +29,9 @@ class LinearLayer():
         dx = upstream_gradient @ self.weights
         return dx if upstream_gradient.shape[0] > 1 else dx.squeeze()
 
+    def parameters(self):
+        return [self.weights, self.biases]
+
+    def gradients(self):
+        return [self.dw, self.db]
+
