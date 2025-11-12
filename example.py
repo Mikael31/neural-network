@@ -37,7 +37,7 @@ model = Model(
     LinearLayer(64, 1)
 )
 loss_fn = MSELoss()
-optimizer = AdamOptimizer(model, learning_rate=0.001)
+optimizer = AdamWOptimizer(model, learning_rate=0.001, weight_decay=0.01)
 
 
 for epoch in range(100):

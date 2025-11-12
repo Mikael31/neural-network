@@ -1,4 +1,4 @@
-from .adam import AdamOptimizer
+from .adam import AdamWOptimizer
 from .dataloader import DataLoader
 from .dataset import Dataset
 from .linear import LinearLayer

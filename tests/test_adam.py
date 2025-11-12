@@ -1,4 +1,4 @@
-from network.adam import AdamOptimizer
+from network.adam import AdamWOptimizer
 import numpy as np
 
 def test_initialization():
@@ -14,7 +14,7 @@ def test_initialization():
                 return [0.1, -0.1]
 
     model = DummyModel()
-    optimizer = AdamOptimizer(model, learning_rate=0.001)
+    optimizer = AdamWOptimizer(model, learning_rate=0.001)
 
     assert optimizer.learning_rate == 0.001
     assert optimizer.beta1 == 0.9
@@ -44,7 +44,7 @@ def test_momentum_shape():
                 return []
 
     model = DummyModel()
-    optimizer = AdamOptimizer(model, learning_rate=0.001)
+    optimizer = AdamWOptimizer(model, learning_rate=0.001)
     assert len(optimizer.m) == 3
     assert len(optimizer.m[0]) == 2
     assert len(optimizer.m[1]) == 0
@@ -80,7 +80,7 @@ def test_step():
                 return self.grads
 
     model = DummyModel()
-    optimizer = AdamOptimizer(model, learning_rate=0.0001)
+    optimizer = AdamWOptimizer(model, learning_rate=0.0001)
     optimizer.step()
 
     assert optimizer.t == 2
