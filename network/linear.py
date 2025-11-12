@@ -15,7 +15,6 @@ class LinearLayer():
         self.weights = np.random.normal(0, std_dev, (self.output_size, self.input_size))
         self.biases = np.zeros(self.output_size)
 
-
     def forward(self, input):
         self.cached_input = input
         return input @ self.weights.T + self.biases

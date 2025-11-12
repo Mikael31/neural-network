@@ -17,10 +17,10 @@ class AdamOptimizer():
                 self.m[i][j] = self.beta1 * self.m[i][j] + (1 - self.beta1) * grad
                 self.v[i][j] = self.beta2 * self.v[i][j] + (1 - self.beta2) * grad ** 2
 
-                self.m[i][j] = self.m[i][j] / (1 - self.beta1 ** self.t)
-                self.v[i][j] = self.v[i][j] / (1 - self.beta2 ** self.t)
+                m_hat = self.m[i][j] / (1 - self.beta1 ** self.t)
+                v_hat = self.v[i][j] / (1 - self.beta2 ** self.t)
 
-                param -= self.learning_rate * self.m[i][j] / (np.sqrt(self.v[i][j]) + self.epsilon)
+                param -= self.learning_rate * m_hat / (np.sqrt(v_hat) + self.epsilon)
 
         self.t += 1
 
