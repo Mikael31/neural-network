@@ -4,6 +4,8 @@ class MSELoss:
     def forward(self, predicted, truth):
         self.predicted = predicted
         self.truth = truth
+        assert predicted.shape == truth.shape
+        
         # Fully reduced loss, meaning average of batch aswell
         return np.mean((predicted - truth) ** 2)
 
